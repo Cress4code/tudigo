@@ -180,9 +180,10 @@ $(document).ready(function ($  ) {
         today: 'Today',
         clear: 'Clear',
         close: 'OK',
+        selectYears: 100,
         formatSubmit:  'yyyy-mm-dd',
         selectMonths: true,
-        selectYears: true
+        
 
 
     });
