@@ -314,21 +314,20 @@ function getTermsList($taxonomies = "category")
     $categories = get_terms($args);
    // print_r($categories);
     if (!empty($categories)) {
-        echo "<ul>";
+
         foreach ($categories as $key => $categorie) {
             //  print_r($categorie);
             ?>
 
-            <li><a class="white-color" href="<?php echo get_term_link($categorie->term_id) ?>">
+            <div class="col m3 s6 project-category-item"> <a class="main-bg white-color " href="<?php echo get_term_link($categorie->term_id) ?>">
 
                     <?php echo $categorie->name ?>
-                </a></li>
+                </a></div>
 
             <?php
 
 
         }
-        echo "</ul>";
     }
 
 }

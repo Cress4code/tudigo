@@ -19,13 +19,13 @@ if ($activePhase != 1 && $canseePreview == false) {
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
 
-    <div class=" default-padding-section main-bg">
+    <div class=" default-padding-section main-bg" style="padding-bottom:10px ">
 
 
         <div class=" white-color ">
             <div class="row">
                 <div class="col s12 m2">
-                    <div class="">
+                    <div class="" style="    margin: 30px 0;">
                         <div class="img-container">
                             <img src="<?php echo get_image_url(get_the_ID(), "full") ?>" class=""
                                  alt="Image du projet"/>
@@ -36,19 +36,19 @@ if ($activePhase != 1 && $canseePreview == false) {
                     <div class="middle ">
                         <h1 class="title-1" style="
     font-size: 60px;
-    line-height: 55px;
+    line-height: 54px;
 ">
                             <?php
                             the_title();
                             ?>
                         </h1>
-                        <h2 class="title-2" style="    font-size: 27px;
+                        <p class="title-2" style="    font-size: 27px;
     line-height: 28px;">
                             <?php
                             the_excerpt()
                             ?>
-                        </h2>
-                        <p class="text-1">
+                        </p>
+                        <p class="text-1 hidden-xs">
                             <span>Categorie: </span>
                             <?php
                             getPostTermsList(get_the_ID(), "categories-project")
@@ -58,44 +58,44 @@ if ($activePhase != 1 && $canseePreview == false) {
                 </div>
 
                 <div class="col s12 m4">
-                    <div class=" " style="
+                    <div class=" map-corver " style="
     width: 50%;
-    margin: 45px auto;
+    margin: -2px auto;
 ">
+                        <div class="hidden-xs">
+                            <?php
+                            get_template_part("maps")
+                            ?>
+                        </div>
+
+
+                    </div>
+                    <p class="text-1" style="padding: 10px">
+
+
+                        <span class="second-color " >   <i class="fa fa-map-marker"></i></span>
+                        <?php
+                        $author = get_the_author_meta('ID');
+                        $usermeta = get_user_meta($author, "userData", false);
+                        $term = wp_get_post_terms(get_the_ID(), 'states-project');
+                        $term = $term[0];
+
+
+                        echo $term->name . " , CA ";
+
+
+                        ?>
+
+                        <br/>
 
                         <?php
-                        get_template_part("maps")
+                        echo $author = get_the_author();
+
+
                         ?>
-                        <p class="text-1">
-
-                            <i class="fa fa-map-marker"></i>
-                            <span> </span>
-                            <?php
-                            $author = get_the_author_meta('ID');
-                            $usermeta = get_user_meta($author, "userData", false);
-                            $term=wp_get_post_terms(get_the_ID(),'states-project');
-                            $term=$term[0];
-
-                            if (!empty($usermeta)) {
-                                $usermeta = $usermeta[0];
-                                $usermeta = (json_decode($usermeta));
-                                echo $term->name . "- " . $usermeta->zipCode;
-                            }
 
 
-                            ?>
-
-                            <br/>
-
-                            <?php
-                            echo $author = get_the_author();
-
-
-                            ?>
-
-
-                        </p>
-                    </div>
+                    </p>
                 </div>
 
             </div>
@@ -103,22 +103,18 @@ if ($activePhase != 1 && $canseePreview == false) {
 
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
+
     <?php
     if (isset($_GET, $_GET['token']) && !empty($_GET)) {
         $token = $_GET['token'];
         $dailyVotes = new DailyVotes();
 
 
-
-         if ($dailyVotes->validateToken($token)) {
+        if ($dailyVotes->validateToken($token)) {
             $votes = new Votes();
             $votes->storeVote(get_the_ID());
-             get_template_part("voting/succesVote");
-             echo "<script> var canShare=true </script>";
+            get_template_part("voting/succesVote");
+            echo "<script> var canShare=true </script>";
 
         } else {
             wp_redirect(get_the_permalink());
@@ -126,10 +122,30 @@ if ($activePhase != 1 && $canseePreview == false) {
     }
 
     ?>
+    <div style="padding: 40px">
+        <div class="visible-xs">
+            <?php
+            $votes = new Votes();
+            $count = $votes->getPostVotes(get_the_ID());
+
+
+            ?>
+            <h3 class="" style="font-size: 30px">
+                NUMBER OF VOTERS :
+                <span class="vote-number main-color">
+                            <?php
+                            echo !empty($count) ? $count : 0
+                            ?>
+                        </span>
+        </div>
+    </div>
+
     <div class="  ">
         <div class="container">
             <div class="row">
                 <div class="col s12 m8">
+
+
                     <div class=" " style="padding: 0 20px;">
 
                         <?php
@@ -175,7 +191,7 @@ if ($activePhase != 1 && $canseePreview == false) {
 
 
                         ?>
-                        <h3 class="title-3">
+                        <h3 class="title-3 hidden-xs">
                             NUMBER OF VOTERS :
                             <span class="vote-number main-color">
                             <?php
@@ -191,7 +207,7 @@ if ($activePhase != 1 && $canseePreview == false) {
                             Each action brings him an extra point.
                         </p>
                         <?php
-                       // $canseePreview = false;
+                        // $canseePreview = false;
                         if ($canseePreview == false) {
                             ?>
 

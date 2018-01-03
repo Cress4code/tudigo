@@ -29,8 +29,8 @@
          <div class="     ">
              <div class="container">
                  <div class="row">
-                     <div class="col s12 m6">
-                         <div class=" white-color ">
+                     <div class="col s12  ">
+                         <div class=" white-color text-center">
                              <h1><?php echo the_title()?></h1>
                          </div>
                      </div>

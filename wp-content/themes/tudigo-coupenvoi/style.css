@@ -334,26 +334,6 @@ h1,h2,h3,h4,h5,h6{
 /*MAPS*/
 
 
-#us-map{
-    display: block;
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-    path:hover, polyline:hover {
-    stroke: #002868 !important;
-    stroke-width:2px;
-    stroke-linejoin: round;
-    fill: #002868 !important;
-    cursor: pointer;
-}
-#path67 {
-    fill: none !important;
-    stroke: #A9A9A9 !important;
-    cursor: default;
-}
 #info-box {
     display: none;
     position: absolute;
@@ -374,8 +354,16 @@ h1,h2,h3,h4,h5,h6{
     line-height: 20px;
     font-size: 18px
 }
-
-
+.project-category-item{
+    margin-bottom: 30px;
+}
+.project-category-item a{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 55px;
+    text-align: center;
+}
 
 
 /*DEFAULT*/
@@ -487,7 +475,7 @@ video {
 }
 
 .wrapper h2{
-    font-size: 85px ;
+   /* font-size: 85px ;*/
     padding: 35px 0;
     text-align: center;
 }
@@ -539,9 +527,13 @@ video {
     margin: 20px;
     padding: 20px;
 }
+
 #MapCalifornia{
     width: 100%;
     height: 300px;
+}
+.map-corver #MapCalifornia{
+    height: 200px;
 }
 
 
@@ -598,6 +590,22 @@ video {
     border-bottom-color: #FFF !important;
 }
 
+#clickVideoModal{
+    position: relative;
+    top: -220px;
+}
+.small-padding img{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.small-padding img:hover{
+    transition: filter .5s ease-in-out;
+    -webkit-filter: grayscale(0%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+    filter: grayscale(0%); /* FF 35+ */
+}
+
+
 .visible-xs{
     display: none;
 }
@@ -606,6 +614,10 @@ video {
     header .logo-list {
         display:none;
 
+    }
+    header .title .logo-cp{
+        width: 50px;
+        height: 50px;
     }
     .modal{
         width:100%

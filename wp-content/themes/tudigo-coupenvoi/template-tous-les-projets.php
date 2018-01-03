@@ -14,7 +14,7 @@ if ($activePhase != 1) {
 <br>
 <br>
 <br>
-<div class=" default-padding-section main-bg">
+<div class=" default-padding-section main-bg" >
     <div class=""
          style="background-image: url(<?php //  get_template_directory_uri() . '/img/background.jpg' ?>) ;  ">
 
@@ -66,7 +66,7 @@ if ($activePhase != 1) {
                     <div class="input-field col s3">
 
                         <select class="" name="cat">
-                            <option value=""> Categories</option>
+                            <option value=""> Category : </option>
                             <?php
                             echo getTermsListSelectID('categories-project');
                             ?>
@@ -104,9 +104,11 @@ if ($activePhase != 1) {
 </div>
 
 
-<div class="default-padding-section">
+<div class="default-padding-section  ">
 
     <div class="container">
+        <h2 class="text-center">Categories of projects</h2>
+        <p class="text-center font-300 sub-title">Also find the projects of each category.</p>
         <div class="row">
             <div class="col s12 ">
                 <div class="categories-of-project">

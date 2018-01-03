@@ -157,7 +157,7 @@
             width: 100%;
         }
 
-        path:hover, circle:hover {
+        path:hover, polyline:hover {
             stroke: <?php echo $second_color; ?> !important;
             stroke-width: 2px;
             stroke-linejoin: round;
@@ -198,7 +198,7 @@
         <span>
             <a href="<?php echo home_url() ?>" title="<?php echo bloginfo('name');?>" rel="nofollow">
                 <img class="logo-cp " src="<?php echo get_field("site_logo_application", "option") ?>"
-                     alt="Coup d'Envoi">
+                     alt="<?php echo bloginfo("name") ?>">
             </a>
         </span>
         <span class="bold">
@@ -219,7 +219,7 @@
     } else {
         ?>
         <a href="<?php echo home_url('project-login') ?>"
-           class="  second-border-color  second-bg btn-login">Sign in </a>
+           class="  second-border-color  second-bg btn-login hidden-xs">Sign in </a>
         <?php
     }}
     ?>

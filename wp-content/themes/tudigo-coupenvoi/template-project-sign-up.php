@@ -219,8 +219,13 @@ global $activePhase;
 
                                 <div class="row">
 
+                                    <div class="input-field col m6 s12">
+                                        <input type="text" id="" value="California"  readonly required
+                                               class="validate">
+                                        <label for="user_pass1">State</label>
+                                    </div>
 
-                                    <div class="input-field col m12 s12">
+                                    <div class="input-field col m6 s12">
                                         <select id="post_categoryProject" name="statesProject"
                                                 class="validate">
 

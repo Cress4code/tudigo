@@ -55,38 +55,51 @@
                 <div class="col s12 m6">
                     <div class="working-duration second-bg white-color">
                         <?php
-                        echo get_field("site_current_edition","option")
+                        echo get_field("site_current_edition", "option")
                         ?>
                     </div>
-                    <div class="small-padding">
+                    <div class="small-padding text-center">
                         <?php
                         if (!empty($currentPhases->site_banner_image)) {
                             ?>
 
-                            <img  width="100%" class="responsive-img"
+
+                            <img width="100%" class="responsive-img"
                                  src="<?php echo $currentPhases->site_banner_image ?>"
-                                 alt="<?php echo bloginfo('name');?>"/>
+                                 alt="<?php echo bloginfo('name'); ?>"/>
                             <?php
+                            if (!empty($currentPhases->site_banner_phase_video_link)) {
+                                ?>
 
-                        } else {
-                            ?>
-                            <iframe class="responsive-img"
-                                    style="background-image: url('<?php echo get_image_url(get_the_ID(), "full") ?>')"
-                                    width="100%" height="400px"
-                                    src="<?php echo str_replace("watch?v=","embed/",$currentPhases->site_banner_phase_video_link ). '?autoplay=0&showinfo=0&controls=0'; ?>"
-                                    frameborder="0" allowfullscreen>
+                                <button data-target="videoModalPopup"
+                                        class="btn-floating btn-large waves-effect waves-light modal-trigger second-bg"
+                                        id="clickVideoModal"><i class="material-icons">play_arrow</i></button>
 
 
-                            </iframe>
+                                <div id="videoModalPopup" class="modal">
 
-                            <?php
+                                    <div class="modal-content" style="padding: 0">
+                                        <div class="row">
+                                            <iframe class="responsive-img"
+                                                    style="background-image: url('<?php echo get_image_url(get_the_ID(), "full") ?>')"
+                                                    width="100%" height="400px"
+                                                    src="<?php echo str_replace("watch?v=", "embed/", $currentPhases->site_banner_phase_video_link) . '?autoplay=0&showinfo=0&controls=0'; ?>"
+                                                    frameborder="0" allowfullscreen>
+
+
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+
 
                         }
 
                         ?>
 
-</div>
-
+                    </div>
 
 
                 </div>

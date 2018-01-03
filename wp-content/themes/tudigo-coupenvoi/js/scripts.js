@@ -133,7 +133,7 @@ $(document).ready(function ($  ) {
        window.location.href=href;
     });
 
-    $("path, circle").mouseleave(function (e) {
+    $("path, polyline").mouseleave(function (e) {
         $('#info-box').css('display', 'none');
     });
 
@@ -284,11 +284,11 @@ $(document).ready(function ($  ) {
     }
 
 
+    //VOTING
+    $('#clickVideoModal').click(function(){
 
-    // HOME VIDEO MODAL
-    $("#video").click(function () {
+        $('#videoModalPopup').modal();
+    } );
 
 
-        $("#videoModal").modal();
-    })
 });
