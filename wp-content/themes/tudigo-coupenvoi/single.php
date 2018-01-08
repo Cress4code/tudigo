@@ -1,7 +1,12 @@
 <?php
+
 get_header();
+//echo  get_field("sender_email","option");
+
 ?>
 <?php
+
+
 $canseePreview = false;
 if (is_user_logged_in()) {
     $canseePreview = true;
@@ -27,7 +32,7 @@ if ($activePhase != 1 && $canseePreview == false) {
                 <div class="col s12 m2">
                     <div class="" style="    margin: 30px 0;">
                         <div class="img-container">
-                            <img src="<?php echo get_image_url(get_the_ID(), "full") ?>" class=""
+                            <img src="<?php echo $image=get_image_url(get_the_ID(), "full") ?>" class=""
                                  alt="Image du projet"/>
                         </div>
                     </div>
@@ -49,7 +54,7 @@ if ($activePhase != 1 && $canseePreview == false) {
                             ?>
                         </p>
                         <p class="text-1 hidden-xs">
-                            <span>Categorie: </span>
+                            <span>Category: </span>
                             <?php
                             getPostTermsList(get_the_ID(), "categories-project")
                             ?>
@@ -70,7 +75,7 @@ if ($activePhase != 1 && $canseePreview == false) {
 
 
                     </div>
-                    <p class="text-1" style="padding: 10px">
+                    <strong class="text-1" style="padding: 10px">
 
 
                         <span class="second-color " >   <i class="fa fa-map-marker"></i></span>
@@ -95,7 +100,7 @@ if ($activePhase != 1 && $canseePreview == false) {
                         ?>
 
 
-                    </p>
+                    </strong>
                 </div>
 
             </div>
@@ -147,20 +152,22 @@ if ($activePhase != 1 && $canseePreview == false) {
 
 
                     <div class=" " style="padding: 0 20px;">
+                        <div id="background-video" style="
 
-                        <?php
-                        if (!empty(get_post_meta(get_the_ID(), 'rssocial-facebook', true))) {
-                            ?>
-                            <iframe style="background-image: url('<?php echo get_image_url(get_the_ID(), "full") ?>')"
-                                    frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen
-                                    width="100%" height="345"
-                                    src="<?php echo str_replace("watch?v=", "embed/", get_post_meta(get_the_ID(), 'rssocial-youtube', true)); ?>">
+                                background-image: url(<?php echo $image ?>) "   >
+                            <button  id="youtube-player-button"  data-youtubelink="<?php echo str_replace("watch?v=", "embed/", get_post_meta(get_the_ID(), 'rssocial-youtube', true)); ?>" style="background: black;
+  color: white;
+
+  resize: vertical;
+  overflow: auto;
+  margin: 0 auto;
+"
+                                    class="btn-floating btn-large waves-effect waves-light modal-trigger second-bg"
+                                     ><i class="material-icons">play_arrow</i></button>
+
+                        </div>
 
 
-                            </iframe>
-                            <?php
-                        }
-                        ?>
 
                         <h2> OUR PROJECT </h2>
                         <div class="content-wrapper">

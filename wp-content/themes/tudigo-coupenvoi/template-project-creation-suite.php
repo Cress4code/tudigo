@@ -60,7 +60,7 @@ if (isset($_POST) && !empty($_POST)) {
 
 if ($postStatus==="publish")
 {
-    wp_mail("cressblaz@gmail.com","Published Project","Salut");
+    //wp_mail("cressblaz@gmail.com","Published Project","Salut");
 
     $currentusert=wp_get_current_user();
 

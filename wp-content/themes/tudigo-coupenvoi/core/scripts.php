@@ -54,6 +54,9 @@ function scriptloop()
 
 
     ];
+    if (is_singular('project')){
+        $scripts['facebook-api']="/js/facebook.js";
+    }
 
     foreach ($scripts as $key=>$style){
         wp_register_script($key , get_template_directory_uri() .$style , array(), ' ', 'true');

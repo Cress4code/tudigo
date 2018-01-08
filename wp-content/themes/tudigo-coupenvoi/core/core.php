@@ -12,6 +12,8 @@ require 'admin/core.php';
 include('scripts.php');
 include('classes/Project.php');
 
+
+
 include('classes/Voteur.php');
 include('classes/DailyVotes.php');
 include('classes/Votes.php');

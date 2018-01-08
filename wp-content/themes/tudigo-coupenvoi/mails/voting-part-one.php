@@ -1,7 +1,7 @@
 
 <?php
 global  $tokenUrl;
-  $tokenUrl;
+global $voter;
 
 ?>
 <!<!DOCTYPE>
@@ -73,9 +73,7 @@ global  $tokenUrl;
     <tr>
         <td colspan="3">
 
-            <p>	Hello ,
-            </p>
-            <div     ><?php echo get_field("mail_voting_text","option")?></div>
+            <div     ><?php echo get_message($voter,get_field("mail_vote_text","option"))?></div>
         </td>
     </tr>
     <tr>

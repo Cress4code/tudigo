@@ -43,7 +43,7 @@ global $main_color;
             <div class="row">
                 <div class="col s12 m2"></div>
                 <div class="col s12 m8">
-                    <div class="text-center">
+                    <div class="text-center content-wrapper">
                         <?php
                         the_content();
                         ?>

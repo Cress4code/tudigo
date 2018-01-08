@@ -16,6 +16,7 @@ $(document).ready(function ($  ) {
 
     var hasregistrerd = 1;
 
+
     $("#saveEmailVoting").submit(function (e) {
 
         e.preventDefault();
@@ -33,7 +34,7 @@ $(document).ready(function ($  ) {
         }
 
         if (validateEmail(email)) {
-            var formData
+            var formData;
             var custom_action;
             if (hasregistrerd == 1) {
                 custom_action = "chk";
@@ -84,6 +85,7 @@ $(document).ready(function ($  ) {
                     if (response.CODESTATUS == 1) {
                         //have votedTODAY
                         hasregistrerd = 1;
+                        $('.error').addClass("second-bg")
                         $('.error').text("You can't vote again Today . Come Back Tomorrow  ");
 
 
@@ -266,7 +268,7 @@ $(document).ready(function ($  ) {
                 console.log(response);
                 if(response.CODESTATUS==3){
                     open_infos(href);
-                    window.location.href;
+                    window.location.href=href;
                 }
 
 
@@ -289,6 +291,20 @@ $(document).ready(function ($  ) {
 
         $('#videoModalPopup').modal();
     } );
+
+    //Youtube
+    $("#youtube-player-button").click(function () {
+        var link=$(this).data("youtubelink");
+        var html=' <iframe  style="width: 100%; height: 100%" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen\n' +
+            '                                    width="100%" height="345"\n' +
+            '                                    src="'+ link+'?autoplay=1">   </iframe>';
+        $("#background-video").html(html);
+
+    });
+
+
+
+
 
 
 });

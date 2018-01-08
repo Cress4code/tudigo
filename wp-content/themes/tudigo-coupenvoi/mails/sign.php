@@ -71,7 +71,7 @@ global  $emailData;
     <tr>
         <td colspan="3">
 
-            <p>	Hello <?php echo   $emailData['first_name'].'  '.$emailData['last_name']?> ,
+            <p>	Thanks <?php echo   $emailData['first_name'].'  '.$emailData['last_name']?>   for signing up ! ,
             </p>
             <div     ><?php echo get_field("mail_registration_text","option")?></div>
         </td>
@@ -79,7 +79,7 @@ global  $emailData;
     <tr>
         <td colspan="3" class="text-center">
             <br>    <br>
-            <a href="<?php echo $emailData['tokenLink']; ?>"  class="tudigo-btn">Confirme</a>
+            <a href="<?php echo $emailData['tokenLink']; ?>"  class="tudigo-btn">Confirm</a>
             <br>    <br>    <br>    <br>
         </td>
 

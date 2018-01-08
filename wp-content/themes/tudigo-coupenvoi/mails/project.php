@@ -98,6 +98,15 @@ $currentUser=wp_get_current_user();
 
         </td>
     </tr>
+    <tr>
+        <td colspan="3" class="text-center">
+            <br>    <br>
+            <a href="<?php home_url('project-suite') ?>"  class="tudigo-btn">Edit</a>
+            <br>    <br>    <br>    <br>
+        </td>
+
+
+    </tr>
 
     <tr>
         <td colspan="3">

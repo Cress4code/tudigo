@@ -49,7 +49,7 @@
                 <a href="<?php the_permalink(); ?>"
                    title="   <?php the_title(); ?>" class="second-btn main-bg card-read-more white-color radius fixed-bottom">
 
-                    <span class="btn-text">Discorver the project</span>
+                    <span class="btn-text">Discover the project </span>
                 </a>
             </div>
 

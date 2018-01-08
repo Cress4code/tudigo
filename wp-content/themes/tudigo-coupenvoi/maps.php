@@ -100,7 +100,7 @@ if( !empty($terms)){
                 'hide_empty' => false];
 
             $states = get_terms($args);
-            print_r($states);
+           // print_r($states);
             if (!empty($states)) {
                 foreach ($states as $state) {
                     $svg_code = get_field('svg_code', $state);

@@ -91,6 +91,43 @@ Class Voteur
 
                     }
                     break;
+                case "facebook_user":
+
+                    $voter = $this->checkEmailSaved($formData->email);
+
+                    if (!empty($voter)) {
+                        $voterTodayVoted = $this->haveVotedToday($voter->ID);
+
+                        if (empty($voterTodayVoted)) {
+                            $votesToken = $this->saveDailyVote($this->formData->post_id, $voter->ID);
+                            $this->genericSendMail($this->formData->post_id, $voter->email, $votesToken);
+                            $tokenLink = get_the_permalink($this->formData->post_id) . '?token=' . $votesToken;
+                            $backData = [CODESTATUS => self::VOTESAVED, MESSAGE => "", "TOKENURL" => "$tokenLink"];
+                            echo json_encode($backData);
+                        } else {
+                            $backData = [CODESTATUS => self::HAVEVOTEDTODAY, MESSAGE => "", "ACTIONDOING" => "voted"];
+                            echo json_encode($backData);
+                        }
+
+
+                    } else {
+                        $voterID = $this->saveVoter($formData);
+                        if (!empty($voterID)) {
+
+                            $votesToken = $this->saveDailyVote($this->formData->post_id, $voterID);
+                            $isSent=$this->genericSendMail($this->formData->post_id, $this->formData->email, $votesToken);
+                            if($isSent==true){
+                                $tokenLink = get_the_permalink($this->formData->post_id) . '?token=' . $votesToken;
+                                $backData = [CODESTATUS => self::VOTESAVED, MESSAGE => "", "TOKENURL" => "$tokenLink"];
+                                echo json_encode($backData);
+                            }else{
+
+                            }
+
+                        }
+                    }
+
+                    break;
 
                 default:
                     $backData = [CODESTATUS => 0, MESSAGE => ""];
@@ -149,19 +186,32 @@ Class Voteur
 
 
         if (!empty($token)) {
-            $tokenLink = get_the_permalink($post_ID) . '?token=' . $token;
-            $message = $this->getStandardMailMessage($tokenLink);
-                $this->sendMail($email, "VOTING CONFIRMATION LINK", $message);
 
+            $message = $this->getStandardMailMessage($post_ID,$token);
+                $isSent=$this->sendMail($email, "VOTING CONFIRMATION LINK", $message);
+                if($isSent==true){
+                    return true;
+                }else{
+                    return false;
+                }
         }
     }
 
-    public function getStandardMailMessage($tokenlink)
+    public function getStandardMailMessage($post_ID,$token)
     {
         global  $tokenUrl;
-          $tokenUrl=$tokenlink;
+        global  $voter;
 
-        ob_start();
+        $tokenLink = get_the_permalink($post_ID) . '?token=' . $token;
+        $tokenUrl=$tokenLink;
+
+        $userinfo=($this->getVoterInfoFromToken($token));
+        $userinfo=(array)$userinfo[0];
+
+        $voter["last_name"] =$userinfo['nom'];
+        $voter["first_name"]=$userinfo['prenom'] ;
+        $voter["project_title"]=get_the_title($post_ID) ;
+
         get_template_part('mails/voting-part-one');
         $message = ob_get_contents();
       ob_end_clean();
@@ -172,7 +222,15 @@ Class Voteur
 
     public function sendMail($email, $subject, $messages)
     {
-        wp_mail($email, $subject, $messages);
+        add_filter('wp_mail_content_type', create_function('', 'return "text/html"; '));
+        $email = wp_mail($email, $subject, $messages);
+        remove_filter('wp_mail_content_type', 'set_html_content_type');
+        if($email){
+            return true;
+        }else{
+
+            return false;
+        }
 
     }
 
@@ -212,7 +270,7 @@ Class Voteur
 
             )
         );
-        print_r($insert);
+       // print_r($insert);
         if ($insert) {
 
             $backData = [CODESTATUS => 0, MESSAGE => "", "VOTER" => ""];
@@ -256,6 +314,15 @@ Class Voteur
         $voters= $wpdb->get_results("SELECT * FROM  $tableName");
         return $voters;
     }
+
+
+    function getVoterInfoFromToken($token){
+        $resultats = $this->dbObject->get_results("SELECT *   FROM {$this->tableDailyVotes} , {$this->tableName}  WHERE {$this->tableName}.ID={$this->tableDailyVotes}.voterID AND {$this->tableDailyVotes}.tokenVotes='$token'");
+      return $resultats;
+    }
+
+
+
 
 
 }

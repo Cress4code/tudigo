@@ -17,16 +17,16 @@ if (function_exists('acf_add_options_page')) {
         'capability' => 'edit_posts',
         'redirect' => false
     ));
-   /* acf_add_options_sub_page(array(
-        'page_title' => 'Slide',
-        'menu_title' => 'Slide',
-        'parent_slug' => $parent['menu_slug'],
-    ));
-    acf_add_options_sub_page(array(
-        'page_title' => 'Equipe de  travail',
-        'menu_title' => 'Equipe de travail',
-        'parent_slug' => $parent['menu_slug'],
-    ));*/
+    /* acf_add_options_sub_page(array(
+         'page_title' => 'Slide',
+         'menu_title' => 'Slide',
+         'parent_slug' => $parent['menu_slug'],
+     ));
+     acf_add_options_sub_page(array(
+         'page_title' => 'Equipe de  travail',
+         'menu_title' => 'Equipe de travail',
+         'parent_slug' => $parent['menu_slug'],
+     ));*/
 }
 
 
@@ -150,6 +150,7 @@ function changedate($date)
     return $date->format('F j, Y'); // 31.07.2012
 
 }
+
 function changedateWithoutYear($date)
 {
 
@@ -183,8 +184,8 @@ function my_login_redirect($redirect_to, $request, $user)
             // redirect them to the default place
             return $redirect_to;
         } else {
-            $role = get_role( 'candidat' );
-            $role->remove_cap( "delete_others_pages","delete_others_posts" ,"delete_pages","delete_posts");
+            $role = get_role('candidat');
+            $role->remove_cap("delete_others_pages", "delete_others_posts", "delete_pages", "delete_posts");
             return home_url('project-creation');
         }
     } else {
@@ -250,11 +251,14 @@ function applicationCurrentState()
     }
     return $applicationProdeure;
 }
-function cleanSpaceAccent($string) {
+
+function cleanSpaceAccent($string)
+{
     $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
 
-    return strtolower(preg_replace('/[^a-zA-Z0-9-_\.]/','', $string));
+    return strtolower(preg_replace('/[^a-zA-Z0-9-_\.]/', '', $string));
 }
+
 function getCountriesList()
 {
     // Get cURL resource
@@ -273,14 +277,15 @@ function getCountriesList()
 }
 
 function getPostTerm($postID, $taxonomies = "category")
-{       $cats=[];
+{
+    $cats = [];
     $categories = get_the_terms($postID, $taxonomies);
     if (!empty($categories)) {
         foreach ($categories as $key => $categorie) {
 
-            $cats=[
-                'slug'=>$categorie->slug,
-                'name'=>$categorie->name
+            $cats = [
+                'slug' => $categorie->slug,
+                'name' => $categorie->name
             ];
         }
 
@@ -308,18 +313,33 @@ function getPostTermsList($postID, $taxonomies = "category", $linkClass = "", $i
     }
 }
 
+function getPostTermsListOnlyText($postID, $taxonomies = "category", $linkClass = "", $iconClass = "")
+{
+    $categories = get_the_terms($postID, $taxonomies);
+    $txt = "";
+    if (!empty($categories)) {
+        foreach ($categories as $key => $categorie) {
+            $txt = $categorie->name;
+
+        }
+    }
+    return $txt;
+}
+
 function getTermsList($taxonomies = "category")
-{   $args=[ 'taxonomy' => $taxonomies,
-    'hide_empty' => false];
+{
+    $args = ['taxonomy' => $taxonomies,
+        'hide_empty' => false];
     $categories = get_terms($args);
-   // print_r($categories);
+    // print_r($categories);
     if (!empty($categories)) {
 
         foreach ($categories as $key => $categorie) {
             //  print_r($categorie);
             ?>
 
-            <div class="col m3 s6 project-category-item"> <a class="main-bg white-color " href="<?php echo get_term_link($categorie->term_id) ?>">
+            <div class="col m3 s6 project-category-item"><a class="main-bg white-color "
+                                                            href="<?php echo get_term_link($categorie->term_id) ?>">
 
                     <?php echo $categorie->name ?>
                 </a></div>
@@ -333,31 +353,33 @@ function getTermsList($taxonomies = "category")
 }
 
 
-function getTermsListSelect($taxonomies = "category",$cats=[])
-{  $args=[ 'taxonomy' => $taxonomies,
-    'hide_empty' => false];
+function getTermsListSelect($taxonomies = "category", $cats = [])
+{
+    $args = ['taxonomy' => $taxonomies,
+        'hide_empty' => false];
     $categories = get_terms($args);
- //echo   $slug=$cats=['slug'];
+    //echo   $slug=$cats=['slug'];
     if (!empty($categories)) {
         foreach ($categories as $key => $categorie) {
 
 
-                ?>
+            ?>
 
-                <option value="<?php echo $categorie->slug ?>">
+            <option value="<?php echo $categorie->slug ?>">
 
-                    <?php echo $categorie->name ?>
-                </option>
+                <?php echo $categorie->name ?>
+            </option>
 
-                <?php
+            <?php
 
         }
     }
 }
 
-function getTermsListSelectID($taxonomies = "category",$cats=[])
-{  $args=[ 'taxonomy' => $taxonomies,
-    'hide_empty' => false];
+function getTermsListSelectID($taxonomies = "category", $cats = [])
+{
+    $args = ['taxonomy' => $taxonomies,
+        'hide_empty' => false];
     $categories = get_terms($args);
     //echo   $slug=$cats=['slug'];
     if (!empty($categories)) {
@@ -376,32 +398,31 @@ function getTermsListSelectID($taxonomies = "category",$cats=[])
         }
     }
 }
-function getTermsListSelectWithlastSetValue($taxonomies = "category",$lastsetvalue="")
-{
-    $args=[ 'taxonomy' => $taxonomies,
-        'hide_empty' => false];
 
+function getTermsListSelectWithlastSetValue($taxonomies = "category", $lastsetvalue = "")
+{
+    $args = ['taxonomy' => $taxonomies,
+        'hide_empty' => false];
 
 
     $categories = get_terms($args);
 
-    $optionsTags="";
-    $firstoptionTags="";
+    $optionsTags = "";
+    $firstoptionTags = "";
     //echo   $slug=$cats=['slug'];
     if (!empty($categories)) {
         foreach ($categories as $key => $categorie) {
 
-            if($categorie->slug!=$lastsetvalue){
-                $optionsTags.="<option value='$categorie->slug'> $categorie->name  </option> ";
-            }else{
-                $firstoptionTags.="<option value='$categorie->slug'> $categorie->name  </option> ";
+            if ($categorie->slug != $lastsetvalue) {
+                $optionsTags .= "<option value='$categorie->slug'> $categorie->name  </option> ";
+            } else {
+                $firstoptionTags .= "<option value='$categorie->slug'> $categorie->name  </option> ";
             }
 
 
-
         }
-        echo  $firstoptionTags;
-        echo  $optionsTags;
+        echo $firstoptionTags;
+        echo $optionsTags;
 
     }
 }
@@ -539,7 +560,7 @@ function saveFile($fileInputName, $post_id)
         $extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
 
         $extension_upload = strtolower(substr(strrchr($_FILES[$fileInputName]['name'], '.'), 1));
-          $fileName = $upload_dir . "featuredImage" . $post_id . "." . $extension_upload;
+        $fileName = $upload_dir . "featuredImage" . $post_id . "." . $extension_upload;
         if (in_array($extension_upload, $extensions_valides)) {
             if (move_uploaded_file($_FILES[$fileInputName]["tmp_name"], $fileName)) {
                 echo "The file " . basename($_FILES[$fileInputName]["name"]) . " has been uploaded.";
@@ -563,53 +584,63 @@ add_action('init', 'myStartSession', 1);
 add_action('wp_logout', 'myEndSession');
 add_action('wp_login', 'myEndSession');
 
-function myStartSession() {
-    if(!session_id()) {
+function myStartSession()
+{
+    if (!session_id()) {
         session_start();
     }
 }
 
-function myEndSession() {
-    session_destroy ();
+function myEndSession()
+{
+    session_destroy();
 }
 
 // RESTRICT ACCESS TO NOT ADMIN
-function custom_remove_no_admin_access(){
-    if ( ! defined( 'DOING_AJAX' ) && ! current_user_can( 'manage_options' ) ) {
-        wp_redirect( home_url() );
+function custom_remove_no_admin_access()
+{
+    if (!defined('DOING_AJAX') && !current_user_can('manage_options')) {
+        wp_redirect(home_url());
         die();
     }
 }
-add_action( 'admin_init', 'custom_remove_no_admin_access', 1 );
+
+add_action('admin_init', 'custom_remove_no_admin_access', 1);
 
 
-add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+add_filter('wp_mail_content_type', 'set_html_content_type');
 
 
+function xyz_filter_wp_mail_from($email)
+{
 
-
-function xyz_filter_wp_mail_from($email){
-
-    return get_field("sender_email","option");
+    return trim(get_field("sender_email", "option"));
 }
+
 add_filter("wp_mail_from", "xyz_filter_wp_mail_from");
 
-function xyz_filter_wp_mail_from_name($from_name){
-    return  get_bloginfo();
+function xyz_filter_wp_mail_from_name($from_name)
+{
+    return get_bloginfo();
 }
+
 add_filter("wp_mail_from_name", "xyz_filter_wp_mail_from_name");
 
-function set_html_content_type() {
+function set_html_content_type()
+{
     return 'text/html';
 }
 
-function searchTreat ($cat,$type,$keyWord){
+
+
+function searchTreat($cat, $type, $keyWord)
+{
     $posts_array = get_posts(
         array(
             'posts_per_page' => -1,
             'post_type' => 'project',
-            'post_title' =>"LIKE %$keyWord%",
-            'post_content' =>"LIKE %$keyWord%",
+            'post_title' => "LIKE %$keyWord%",
+            'post_content' => "LIKE %$keyWord%",
             'tax_query' => array(
                 array(
                     'taxonomy' => 'categories-project',
@@ -626,4 +657,106 @@ function searchTreat ($cat,$type,$keyWord){
     );
 
     return $posts_array;
+}
+
+
+function get_replacement($data = [])
+{
+
+//        var_dump($data);
+
+    $temp = array(
+        '{{first_name}}' => maybe_null_or_empty($data, 'first_name'),
+        '{{last_name}}' => maybe_null_or_empty($data, 'last_name'),
+        '{{project_title}}' => maybe_null_or_empty($data, 'project_title'),
+    );
+    if (!empty($additional)) {
+        $temp = array_merge($temp, $additional);
+    }
+    return $temp;
+
+}
+
+function get_message($data = [], $message)
+{
+
+    $replacement = get_replacement($data);
+    if (isset($replacement) && !empty($replacement)) {
+        foreach ($replacement as $key => $replacer) {
+            $message = str_replace($key, $replacer, $message);
+        }
+    }
+
+    return $message;
+}
+
+function maybe_null_or_empty($element, $property)
+{
+    if (is_object($element)) {
+        $element = (array)$element;
+    }
+    if (isset($element[$property])) {
+        return $element[$property];
+    } else {
+        return "";
+    }
+}
+
+function getFacebookContentOfPost($postID)
+{
+    $title = get_the_title($postID);
+    $city = getPostTermsListOnlyText(get_the_ID(), "categories-project");
+    return "$title is an amazing project in $city  that needs our support to win ! Check it out and vote for it if you like it as well !
+";
+}
+
+// show wp_mail() errors
+add_action('wp_mail_failed', 'onMailError', 10, 1);
+function onMailError($wp_error)
+{
+    echo "<pre>";
+    print_r($wp_error);
+    echo "</pre>";
+    die();
+}
+
+add_action('phpmailer_init', 'send_smtp_email');
+function send_smtp_email($mail)
+{
+    // var_dump($mail);
+    try {
+        //Server settings
+        //$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = get_field("sender_smtp", "option");  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = get_field("sender_email", "option");                // SMTP username
+        $mail->Password = get_field("sender_password", "option");                               // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = (int)get_field("sender_port", "option");;                                    // TCP port to connect to
+
+        /* //Recipients
+         $mail->setFrom('from@example.com', 'Mailer');
+         $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+         $mail->addAddress('ellen@example.com');               // Name is optional
+         $mail->addReplyTo('info@example.com', 'Information');
+         $mail->addCC('cc@example.com');
+         $mail->addBCC('bcc@example.com');
+
+         //Attachments
+         $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+         $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+         //Content
+         $mail->isHTML(true);                                  // Set email format to HTML
+         $mail->Subject = 'Here is the subject';
+         $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';*/
+
+        //$mail->send();
+        // echo 'Message has been sent';
+    } catch (Exception $e) {
+        //echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }
 }

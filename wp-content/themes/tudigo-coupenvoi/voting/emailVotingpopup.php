@@ -13,7 +13,24 @@
     </p>
     <div class="row">
         <div class="modal-content">
+
+
             <form class="white-bg form-corver haveSmallPadding" method="post" id="saveEmailVoting"  >
+                <div class="text-center">
+                    <p class="error  text-center white-color"  style="padding: 10px;">
+
+                    </p>
+                    <!-- Facebook login or logout button -->
+                    <a href="javascript:void(0);" class="main-bg white-color btn-tudigo" data-id="<?php echo get_the_ID()?>"   id="fbLink"><i class="fa fa-facebook"></i> vote with facebook</a>
+
+                    <div class="relative standard-separator">
+                        <hr>
+                        <div class="text-center divider-text">
+                            <span class="black-bg white-color">OR</span>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="">
 
 
@@ -24,7 +41,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input id="email" type="email" class="validate" required name="email">
-                                    <label for="email">Email <span class="error"></span></label>
+                                    <label for="email">Email <span ></span></label>
                                 </div>
                             </div>
                         </div>
@@ -80,9 +97,12 @@
                     </div>
 
                     <div class=" text-center">
+
                         <button type="submit" class="main-bg white-color btn-tudigo">Continue</button>
                     </div>
             </form>
+
+
 
 
         </div>

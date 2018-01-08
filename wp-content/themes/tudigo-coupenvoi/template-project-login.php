@@ -10,8 +10,9 @@ if (isset($_POST) && !empty($_POST)) {
 
 
     if (!empty($user)) {
-        $userMeta = get_user_meta($id, "userData", false);
+        $userMeta = get_user_meta($user->ID, "userData", false);
         $userMeta = $userMeta[0];
+
         if($userMeta['isconfirm']==true){
             if (wp_check_password($data->user_pass, $user->user_pass, $user->ID)) {
 
