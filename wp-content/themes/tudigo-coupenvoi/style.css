@@ -636,12 +636,12 @@ video {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    resize: vertical;
+
     overflow: auto;
 
     background-repeat: no-repeat;
     -webkit-background-size: cover;
-    height: 200px;
+    height: 300px;
     width: 100%;
 }
 

@@ -158,7 +158,7 @@ if ($activePhase != 1 && $canseePreview == false) {
                             <button  id="youtube-player-button"  data-youtubelink="<?php echo str_replace("watch?v=", "embed/", get_post_meta(get_the_ID(), 'rssocial-youtube', true)); ?>" style="background: black;
   color: white;
 
-  resize: vertical;
+
   overflow: auto;
   margin: 0 auto;
 "

@@ -16,6 +16,7 @@ $(document).ready(function(){
                // getFbUserData();
             }
         });
+        FB.AppEvents.logPageView();
     };
 
 // Load the JavaScript SDK asynchronously
